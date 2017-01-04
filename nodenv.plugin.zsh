@@ -1,16 +1,5 @@
-_homebrew-installed() {
-  type brew &> /dev/null
-}
-
-_nodenv-from-homebrew-installed() {
-  brew --prefix nodenv &> /dev/null
-}
-
 FOUND_NODENV=0
-nodenvdirs=("$HOME/.nodenv" "/usr/local/nodenv" "/opt/nodenv" "/usr/local/opt/nodenv")
-if _homebrew-installed && _nodenv-from-homebrew-installed ; then
-    nodenvdirs=($(brew --prefix nodenv) "${nodenvdirs[@]}")
-fi
+nodenvdirs=("$HOME/.nodenv"  "/usr/local/opt/nodenv" "/usr/local/nodenv" "/opt/nodenv")
 
 for nodenvdir in "${nodenvdirs[@]}" ; do
   if [ -d $nodenvdir/bin -a $FOUND_NODENV -eq 0 ] ; then
@@ -20,7 +9,7 @@ for nodenvdir in "${nodenvdirs[@]}" ; do
     fi
     export NODENV_ROOT
     export PATH=${nodenvdir}/bin:$PATH
-    eval "$(nodenv init -)"
+    eval "$(nodenv init --no-rehash -)"
 
     function current_node() {
       echo "$(nodenv version-name)"
