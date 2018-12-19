@@ -1,5 +1,5 @@
 found_rbenv=''
-rbenvdirs=("$HOME/.rbenv" "/usr/local/opt/rbenv" "/usr/local/rbenv" "/opt/rbenv")
+rbenvdirs=("$HOME/.rbenv" "$HOME/.local/rbenv" "/usr/local/opt/rbenv" "/usr/local/rbenv" "/opt/rbenv")
 
 for rbenvdir in "${rbenvdirs[@]}" ; do
   if [ -z "$found_rbenv" ] && [ -d "$rbenvdir/versions" ]; then
